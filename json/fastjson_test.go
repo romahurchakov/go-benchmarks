@@ -18,6 +18,17 @@ func benchmarkUnmarshalFastJSON(data string, b *testing.B) {
 	publicErr = err
 }
 
+func benchmarkMarshalFastJSON(value *fastjson.Value, b *testing.B) {
+	b.ReportAllocs()
+
+	var data []byte
+	for n := 0; n < b.N; n++ {
+		data = value.MarshalTo(data)
+	}
+
+	publicData = data
+}
+
 func BenchmarkUnmarshalFastJSONSmall(b *testing.B) {
 	benchmarkUnmarshalStd(data.SmallJSON, b)
 }
@@ -28,4 +39,19 @@ func BenchmarkUnmarshalFastJSONMedium(b *testing.B) {
 
 func BenchmarkUnmarshalFastJSONLarge(b *testing.B) {
 	benchmarkUnmarshalStd(data.LargeJSON, b)
+}
+
+func BenchmarkMarshalFastJSONSmall(b *testing.B) {
+	val, _ := fastjson.Parse(data.SmallJSON)
+	benchmarkMarshalFastJSON(val, b)
+}
+
+func BenchmarMarshalFastJSONMedium(b *testing.B) {
+	val, _ := fastjson.Parse(data.MediumJSON)
+	benchmarkMarshalFastJSON(val, b)
+}
+
+func BenchmarkMarshalFastJSONLarge(b *testing.B) {
+	val, _ := fastjson.Parse(data.LargeJSON)
+	benchmarkMarshalFastJSON(val, b)
 }
