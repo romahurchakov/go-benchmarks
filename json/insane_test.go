@@ -8,12 +8,12 @@ import (
 	insaneJSON "github.com/vitkovskii/insane-json"
 )
 
-func benchmarkUnmarshalInsaneJSON(data string, b *testing.B) {
+func benchmarkUnmarshalInsaneJSON(data []byte, b *testing.B) {
 	b.ReportAllocs()
 
 	var err error
 	for n := 0; n < b.N; n++ {
-		_, err = insaneJSON.DecodeString(data)
+		_, err = insaneJSON.DecodeBytes(data)
 	}
 
 	publicErr = err
@@ -44,10 +44,14 @@ func BenchmarkUnmarshalInsaneJSONLarge(b *testing.B) {
 	benchmarkUnmarshalInsaneJSON(data.LargeJSON, b)
 }
 
+func BenchmarkUnmarshalInsaneJSONXLarge(b *testing.B) {
+	benchmarkUnmarshalInsaneJSON(data.XLargeJSON, b)
+}
+
 func BenchmarkMarshalInsaneJSONSmall(b *testing.B) {
 	m := make(map[string]interface{})
-	json.Unmarshal([]byte(data.MediumJSON), &m)
-	data, _ := insaneJSON.DecodeString(data.MediumJSON)
+	json.Unmarshal([]byte(data.SmallJSON), &m)
+	data, _ := insaneJSON.DecodeBytes(data.MediumJSON)
 
 	b.ResetTimer()
 	benchmarkMarshalInsaneJSON(data, b)
@@ -56,7 +60,7 @@ func BenchmarkMarshalInsaneJSONSmall(b *testing.B) {
 func BenchmarkMarshalInsaneJSONMedium(b *testing.B) {
 	m := make(map[string]interface{})
 	json.Unmarshal([]byte(data.MediumJSON), &m)
-	data, _ := insaneJSON.DecodeString(data.MediumJSON)
+	data, _ := insaneJSON.DecodeBytes(data.MediumJSON)
 
 	b.ResetTimer()
 	benchmarkMarshalInsaneJSON(data, b)
@@ -64,8 +68,17 @@ func BenchmarkMarshalInsaneJSONMedium(b *testing.B) {
 
 func BenchmarkMarshalInsaneJSONLarge(b *testing.B) {
 	m := make(map[string]interface{})
-	json.Unmarshal([]byte(data.MediumJSON), &m)
-	data, _ := insaneJSON.DecodeString(data.MediumJSON)
+	json.Unmarshal([]byte(data.LargeJSON), &m)
+	data, _ := insaneJSON.DecodeBytes(data.MediumJSON)
+
+	b.ResetTimer()
+	benchmarkMarshalInsaneJSON(data, b)
+}
+
+func BenchmarkMarshalInsaneJSONXLarge(b *testing.B) {
+	m := make(map[string]interface{})
+	json.Unmarshal([]byte(data.XLargeJSON), &m)
+	data, _ := insaneJSON.DecodeBytes(data.MediumJSON)
 
 	b.ResetTimer()
 	benchmarkMarshalInsaneJSON(data, b)

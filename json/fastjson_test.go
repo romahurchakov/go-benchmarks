@@ -30,28 +30,37 @@ func benchmarkMarshalFastJSON(value *fastjson.Value, b *testing.B) {
 }
 
 func BenchmarkUnmarshalFastJSONSmall(b *testing.B) {
-	benchmarkUnmarshalFastJSON(data.SmallJSON, b)
+	benchmarkUnmarshalFastJSON(string(data.SmallJSON), b)
 }
 
 func BenchmarkUnmarshalFastJSONMedium(b *testing.B) {
-	benchmarkUnmarshalFastJSON(data.MediumJSON, b)
+	benchmarkUnmarshalFastJSON(string(data.MediumJSON), b)
 }
 
 func BenchmarkUnmarshalFastJSONLarge(b *testing.B) {
-	benchmarkUnmarshalFastJSON(data.LargeJSON, b)
+	benchmarkUnmarshalFastJSON(string(data.LargeJSON), b)
+}
+
+func BenchmarkUnmarshalFastJSONXLarge(b *testing.B) {
+	benchmarkUnmarshalFastJSON(string(data.XLargeJSON), b)
 }
 
 func BenchmarkMarshalFastJSONSmall(b *testing.B) {
-	val, _ := fastjson.Parse(data.SmallJSON)
+	val, _ := fastjson.Parse(string(data.SmallJSON))
 	benchmarkMarshalFastJSON(val, b)
 }
 
 func BenchmarMarshalFastJSONMedium(b *testing.B) {
-	val, _ := fastjson.Parse(data.MediumJSON)
+	val, _ := fastjson.Parse(string(data.MediumJSON))
 	benchmarkMarshalFastJSON(val, b)
 }
 
 func BenchmarkMarshalFastJSONLarge(b *testing.B) {
-	val, _ := fastjson.Parse(data.LargeJSON)
+	val, _ := fastjson.Parse(string(data.LargeJSON))
+	benchmarkMarshalFastJSON(val, b)
+}
+
+func BenchmarkMarshalFastJSONXLarge(b *testing.B) {
+	val, _ := fastjson.Parse(string(data.XLargeJSON))
 	benchmarkMarshalFastJSON(val, b)
 }

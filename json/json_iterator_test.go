@@ -8,13 +8,13 @@ import (
 	"github.com/romahurchakov/go-benchmarks/json/data"
 )
 
-func benchmarkUnmarshalJsoniter(data string, b *testing.B) {
+func benchmarkUnmarshalJsoniter(data []byte, b *testing.B) {
 	b.ReportAllocs()
 
 	var err error
 	for n := 0; n < b.N; n++ {
 		m := make(map[string]interface{})
-		err = jsoniter.Unmarshal([]byte(data), &m)
+		err = jsoniter.Unmarshal(data, &m)
 	}
 
 	publicErr = err

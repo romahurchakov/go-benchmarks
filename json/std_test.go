@@ -12,13 +12,13 @@ var (
 	publicData []byte
 )
 
-func benchmarkUnmarshalStd(data string, b *testing.B) {
+func benchmarkUnmarshalStd(data []byte, b *testing.B) {
 	b.ReportAllocs()
 
 	var err error
 	for n := 0; n < b.N; n++ {
 		m := make(map[string]interface{})
-		err = json.Unmarshal([]byte(data), &m)
+		err = json.Unmarshal(data, &m)
 	}
 
 	publicErr = err

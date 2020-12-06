@@ -34,13 +34,13 @@ func (m message) IsNil() bool {
 	return m == nil
 }
 
-func benchmarkUnmarshalGojay(data string, b *testing.B) {
+func benchmarkUnmarshalGojay(data []byte, b *testing.B) {
 	b.ReportAllocs()
 
 	var err error
 	for n := 0; n < b.N; n++ {
 		msg := make(message)
-		err = gojay.UnmarshalJSONObject([]byte(data), &msg)
+		err = gojay.UnmarshalJSONObject(data, &msg)
 	}
 
 	publicErr = err
@@ -71,6 +71,10 @@ func BenchmarkUnmarshalGojayLarge(b *testing.B) {
 	benchmarkUnmarshalGojay(data.LargeJSON, b)
 }
 
+func BenchmarkUnmarshalGojayXLarge(b *testing.B) {
+	benchmarkUnmarshalGojay(data.LargeJSON, b)
+}
+
 func BenchmarkMarshalGojaySmall(b *testing.B) {
 	m := make(map[string]interface{})
 	json.Unmarshal([]byte(data.SmallJSON), &m)
@@ -90,6 +94,14 @@ func BenchmarkMarshalGojayMedium(b *testing.B) {
 func BenchmarkMarshalGojayLarge(b *testing.B) {
 	m := make(map[string]interface{})
 	json.Unmarshal([]byte(data.LargeJSON), &m)
+
+	b.ResetTimer()
+	benchmarkMarshalGojay(m, b)
+}
+
+func BenchmarkMarshalGojayXLarge(b *testing.B) {
+	m := make(map[string]interface{})
+	json.Unmarshal([]byte(data.XLargeJSON), &m)
 
 	b.ResetTimer()
 	benchmarkMarshalGojay(m, b)
