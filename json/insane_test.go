@@ -1,7 +1,6 @@
 package json_bench
 
 import (
-	"encoding/json"
 	"testing"
 
 	"github.com/romahurchakov/go-benchmarks/json/data"
@@ -49,8 +48,6 @@ func BenchmarkUnmarshalInsaneJSONXLarge(b *testing.B) {
 }
 
 func BenchmarkMarshalInsaneJSONSmall(b *testing.B) {
-	m := make(map[string]interface{})
-	json.Unmarshal([]byte(data.SmallJSON), &m)
 	data, _ := insaneJSON.DecodeBytes(data.SmallJSON)
 
 	b.ResetTimer()
@@ -58,8 +55,6 @@ func BenchmarkMarshalInsaneJSONSmall(b *testing.B) {
 }
 
 func BenchmarkMarshalInsaneJSONMedium(b *testing.B) {
-	m := make(map[string]interface{})
-	json.Unmarshal([]byte(data.MediumJSON), &m)
 	data, _ := insaneJSON.DecodeBytes(data.MediumJSON)
 
 	b.ResetTimer()
@@ -67,8 +62,6 @@ func BenchmarkMarshalInsaneJSONMedium(b *testing.B) {
 }
 
 func BenchmarkMarshalInsaneJSONLarge(b *testing.B) {
-	m := make(map[string]interface{})
-	json.Unmarshal([]byte(data.LargeJSON), &m)
 	data, _ := insaneJSON.DecodeBytes(data.LargeJSON)
 
 	b.ResetTimer()
@@ -76,8 +69,6 @@ func BenchmarkMarshalInsaneJSONLarge(b *testing.B) {
 }
 
 func BenchmarkMarshalInsaneJSONXLarge(b *testing.B) {
-	m := make(map[string]interface{})
-	json.Unmarshal([]byte(data.XLargeJSON), &m)
 	data, _ := insaneJSON.DecodeBytes(data.XLargeJSON)
 
 	b.ResetTimer()

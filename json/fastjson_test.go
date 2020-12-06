@@ -50,7 +50,7 @@ func BenchmarkMarshalFastJSONSmall(b *testing.B) {
 	benchmarkMarshalFastJSON(val, b)
 }
 
-func BenchmarMarshalFastJSONMedium(b *testing.B) {
+func BenchmarkMarshalFastJSONMedium(b *testing.B) {
 	val, _ := fastjson.Parse(string(data.MediumJSON))
 	benchmarkMarshalFastJSON(val, b)
 }
