@@ -49,6 +49,10 @@ func BenchmarkUnmarshalStdLarge(b *testing.B) {
 	benchmarkUnmarshalStd(data.LargeJSON, b)
 }
 
+func BenchmarkUnmarshalStdXLarge(b *testing.B) {
+	benchmarkUnmarshalStd(data.XLargeJSON, b)
+}
+
 func BenchmarkMarshalStdSmall(b *testing.B) {
 	m := make(map[string]interface{})
 	json.Unmarshal([]byte(data.SmallJSON), &m)
@@ -68,6 +72,14 @@ func BenchmarkMarshalStdMedium(b *testing.B) {
 func BenchmarkMarshalStdLarge(b *testing.B) {
 	m := make(map[string]interface{})
 	json.Unmarshal([]byte(data.LargeJSON), &m)
+
+	b.ResetTimer()
+	benchmarkMarshalStd(m, b)
+}
+
+func BenchmarkMarshalStdXLarge(b *testing.B) {
+	m := make(map[string]interface{})
+	json.Unmarshal([]byte(data.XLargeJSON), &m)
 
 	b.ResetTimer()
 	benchmarkMarshalStd(m, b)

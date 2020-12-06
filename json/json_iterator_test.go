@@ -34,15 +34,19 @@ func benchmarkMarshalJsoniter(data map[string]interface{}, b *testing.B) {
 }
 
 func BenchmarkUnmarshalJsoniterSmall(b *testing.B) {
-	benchmarkUnmarshalStd(data.SmallJSON, b)
+	benchmarkUnmarshalJsoniter(data.SmallJSON, b)
 }
 
 func BenchmarkUnmarshalJsoniterMedium(b *testing.B) {
-	benchmarkUnmarshalStd(data.MediumJSON, b)
+	benchmarkUnmarshalJsoniter(data.MediumJSON, b)
 }
 
 func BenchmarkUnmarshalJsoniterLarge(b *testing.B) {
-	benchmarkUnmarshalStd(data.LargeJSON, b)
+	benchmarkUnmarshalJsoniter(data.LargeJSON, b)
+}
+
+func BenchmarkUnmarshalJsoniterXLarge(b *testing.B) {
+	benchmarkUnmarshalJsoniter(data.XLargeJSON, b)
 }
 
 func BenchmarkMarshalJsoniterSmall(b *testing.B) {
@@ -50,7 +54,7 @@ func BenchmarkMarshalJsoniterSmall(b *testing.B) {
 	json.Unmarshal([]byte(data.SmallJSON), &m)
 
 	b.ResetTimer()
-	benchmarkMarshalStd(m, b)
+	benchmarkMarshalJsoniter(m, b)
 }
 
 func BenchmarkMarshalJsoniterMedium(b *testing.B) {
@@ -58,7 +62,7 @@ func BenchmarkMarshalJsoniterMedium(b *testing.B) {
 	json.Unmarshal([]byte(data.MediumJSON), &m)
 
 	b.ResetTimer()
-	benchmarkMarshalStd(m, b)
+	benchmarkMarshalJsoniter(m, b)
 }
 
 func BenchmarkMarshalJsoniterLarge(b *testing.B) {
@@ -66,5 +70,13 @@ func BenchmarkMarshalJsoniterLarge(b *testing.B) {
 	json.Unmarshal([]byte(data.LargeJSON), &m)
 
 	b.ResetTimer()
-	benchmarkMarshalStd(m, b)
+	benchmarkMarshalJsoniter(m, b)
+}
+
+func BenchmarkMarshalJsoniterXLarge(b *testing.B) {
+	m := make(map[string]interface{})
+	json.Unmarshal([]byte(data.XLargeJSON), &m)
+
+	b.ResetTimer()
+	benchmarkMarshalJsoniter(m, b)
 }

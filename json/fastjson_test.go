@@ -30,15 +30,15 @@ func benchmarkMarshalFastJSON(value *fastjson.Value, b *testing.B) {
 }
 
 func BenchmarkUnmarshalFastJSONSmall(b *testing.B) {
-	benchmarkUnmarshalStd(data.SmallJSON, b)
+	benchmarkUnmarshalFastJSON(data.SmallJSON, b)
 }
 
 func BenchmarkUnmarshalFastJSONMedium(b *testing.B) {
-	benchmarkUnmarshalStd(data.MediumJSON, b)
+	benchmarkUnmarshalFastJSON(data.MediumJSON, b)
 }
 
 func BenchmarkUnmarshalFastJSONLarge(b *testing.B) {
-	benchmarkUnmarshalStd(data.LargeJSON, b)
+	benchmarkUnmarshalFastJSON(data.LargeJSON, b)
 }
 
 func BenchmarkMarshalFastJSONSmall(b *testing.B) {

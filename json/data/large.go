@@ -1,5 +1,6 @@
 package data
 
+// 1.7 MB
 var LargeJSON = `
 {
     "areaNames": {
