@@ -51,7 +51,7 @@ func BenchmarkUnmarshalInsaneJSONXLarge(b *testing.B) {
 func BenchmarkMarshalInsaneJSONSmall(b *testing.B) {
 	m := make(map[string]interface{})
 	json.Unmarshal([]byte(data.SmallJSON), &m)
-	data, _ := insaneJSON.DecodeBytes(data.MediumJSON)
+	data, _ := insaneJSON.DecodeBytes(data.SmallJSON)
 
 	b.ResetTimer()
 	benchmarkMarshalInsaneJSON(data, b)
@@ -69,7 +69,7 @@ func BenchmarkMarshalInsaneJSONMedium(b *testing.B) {
 func BenchmarkMarshalInsaneJSONLarge(b *testing.B) {
 	m := make(map[string]interface{})
 	json.Unmarshal([]byte(data.LargeJSON), &m)
-	data, _ := insaneJSON.DecodeBytes(data.MediumJSON)
+	data, _ := insaneJSON.DecodeBytes(data.LargeJSON)
 
 	b.ResetTimer()
 	benchmarkMarshalInsaneJSON(data, b)
@@ -78,7 +78,7 @@ func BenchmarkMarshalInsaneJSONLarge(b *testing.B) {
 func BenchmarkMarshalInsaneJSONXLarge(b *testing.B) {
 	m := make(map[string]interface{})
 	json.Unmarshal([]byte(data.XLargeJSON), &m)
-	data, _ := insaneJSON.DecodeBytes(data.MediumJSON)
+	data, _ := insaneJSON.DecodeBytes(data.XLargeJSON)
 
 	b.ResetTimer()
 	benchmarkMarshalInsaneJSON(data, b)

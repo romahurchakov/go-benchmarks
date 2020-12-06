@@ -72,7 +72,7 @@ func BenchmarkUnmarshalGojayLarge(b *testing.B) {
 }
 
 func BenchmarkUnmarshalGojayXLarge(b *testing.B) {
-	benchmarkUnmarshalGojay(data.LargeJSON, b)
+	benchmarkUnmarshalGojay(data.XLargeJSON, b)
 }
 
 func BenchmarkMarshalGojaySmall(b *testing.B) {
