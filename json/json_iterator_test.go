@@ -23,9 +23,7 @@ func benchmarkUnmarshalJsoniter(data []byte, b *testing.B) {
 func benchmarkMarshalJsoniter(data map[string]interface{}, b *testing.B) {
 	b.ReportAllocs()
 
-	var (
-		err error
-	)
+	var err error
 	for n := 0; n < b.N; n++ {
 		_, err = jsoniter.Marshal(data)
 	}

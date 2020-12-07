@@ -2,7 +2,6 @@ package json_bench
 
 import (
 	"encoding/json"
-	"fmt"
 	"testing"
 
 	"github.com/romahurchakov/go-benchmarks/json/data"
@@ -28,14 +27,11 @@ func benchmarkUnmarshalStd(data []byte, b *testing.B) {
 func benchmarkMarshalStd(data map[string]interface{}, b *testing.B) {
 	b.ReportAllocs()
 
-	var (
-		err error
-		d   []byte
-	)
+	var err error
+
 	for n := 0; n < b.N; n++ {
-		d, err = json.Marshal(data)
+		_, err = json.Marshal(data)
 	}
-	fmt.Println(string(d))
 
 	publicErr = err
 }
